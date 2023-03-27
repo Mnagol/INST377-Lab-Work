@@ -3,6 +3,13 @@
   by adding `<script src="script.js">` just before your closing `</body>` tag
 */
 
+function filterList(list, query) {
+  return list.filter((item) => {
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = query.toLowerCase();
+    return lowerCaseName.includes(lowerCaseQuery)
+})
+}
 async function mainEvent() { // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
   const filterButton = document.querySelector('.filter_button');
@@ -17,6 +24,8 @@ async function mainEvent() { // the async keyword means we can make API requests
 
       console.log(formProps);
       const newList = filterList(currentList, formProps.resto);
+
+      console.log(newList);
     })
     /*
       ## GET requests and Javascript
@@ -72,4 +81,4 @@ async function mainEvent() { // the async keyword means we can make API requests
   The use of the async keyword means we can "await" events before continuing in our scripts
   In this case, we load some data when the form has submitted
 */
-document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API requests
+document.addEventListener('DOMContentLoaded', async () => mainEvent());
