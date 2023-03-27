@@ -11,6 +11,11 @@ async function mainEvent() { // the async keyword means we can make API requests
     console.log('form submission'); // this is substituting for a "breakpoint"
     filterButton.addEventListener('click', (event) => {
       console.log('clicked FilterButton')
+
+      const formData = new formData(mainForm);
+      const formProps = Object.fromEntries(formData);
+
+      console.log(formProps);
     })
     /*
       ## GET requests and Javascript
