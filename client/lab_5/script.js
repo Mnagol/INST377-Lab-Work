@@ -9,7 +9,9 @@ async function mainEvent() { // the async keyword means we can make API requests
   form.addEventListener('submit', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
     submitEvent.preventDefault(); // This prevents your page from going to http://localhost:3000/api even if your form still has an action set on it
     console.log('form submission'); // this is substituting for a "breakpoint"
-
+    filterButton.addEventListener('click', (event) => {
+      console.log('clicked FilterButton')
+    })
     /*
       ## GET requests and Javascript
         We would like to send our GET request so we can control what we do with the results
