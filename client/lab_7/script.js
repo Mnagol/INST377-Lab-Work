@@ -44,6 +44,8 @@ function getRandomIntInclusive(min, max) {
   
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
+    let storedList = [];
+    let currentList = [];
     loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
       submitEvent.preventDefault(); // This prevents your page from going to http://localhost:3000/api even if your form still has an action set on it
       console.log('Loading data'); // this is substituting for a "breakpoint"
@@ -104,9 +106,9 @@ function getRandomIntInclusive(min, max) {
       
       
       
-      const arrayFromJson = await results.json();
+      storedList = await results.json();
       loadAnimation.style.display = 'none';
-      console.table(arrayFromJson.data); 
+      console.table(storedList); 
      
       
       // this is called "dot notation"
@@ -117,11 +119,15 @@ function getRandomIntInclusive(min, max) {
   
   generateListButton.addEventListener('click', (event) => {   
    console.log('generate new list');
-   const restaurantsList = cutRestaurantList(currentList);
-   injectHTML(restaurantsList);
+   currentList = cutRestaurantList(storedList);
+   console.log(currentList);
+   injectHTML(currentList);
   });
   textField.addEventListener('input', (event) => {
       console.log('input', event.target.value);
+      const newList = filterList(currentList, event.target.value);
+      console.log(newList);
+      injectHTML(newList);
   })
   /*
     This adds an event listener that fires our main event only once our page elements have loaded
