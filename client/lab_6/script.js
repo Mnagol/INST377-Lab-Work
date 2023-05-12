@@ -8,6 +8,16 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
 
+function injectHTML(list) {
+  console.log('fired injectHTML')
+  const target = document.querySelector('#restaurant_list');
+  target.innerHTML = '';
+  list.forEach((item, index) => {
+    const str = `<li>${item.name}</li>`;
+    target.innerHTML += str
+  })
+}
+
 function filterList(list, query) {
   return list.filter((item) => {
     const lowerCaseName = item.name.toLowerCase();
@@ -29,7 +39,7 @@ async function mainEvent() { // the async keyword means we can make API requests
 
       console.log(formProps);
       const newList = filterList(currentList, formProps.resto);
-
+      injectHTML(currentList);
       console.log(newList);
     })
     /*
@@ -74,8 +84,14 @@ async function mainEvent() { // the async keyword means we can make API requests
     */
 
     // This changes the response from the GET into data we can use - an "object"
+    
+    
+    
     const arrayFromJson = await results.json();
-    console.table(arrayFromJson.data); // this is called "dot notation"
+    console.table(arrayFromJson.data); 
+    injectHTML(currentList);
+    
+    // this is called "dot notation"
     // arrayFromJson.data - we're accessing a key called 'data' on the returned object
     // it initially contains all 1,000 records from your request
   });
