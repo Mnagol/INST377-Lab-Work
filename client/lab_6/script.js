@@ -28,7 +28,11 @@ function filterList(list, query) {
 
 function cutRestaurantList(list) {
  console.log('fired cut list');
- 
+ const range = [...Array(15).keys()];
+ const newArray = range.map((item) => {
+   const index = getRandomIntInclusive(0, list.length -1);
+   return list[index]
+ })
 }
 
 async function mainEvent() { // the async keyword means we can make API requests
@@ -97,7 +101,7 @@ async function mainEvent() { // the async keyword means we can make API requests
     
     const arrayFromJson = await results.json();
     console.table(arrayFromJson.data); 
-    injectHTML(currentList);
+   
     
     // this is called "dot notation"
     // arrayFromJson.data - we're accessing a key called 'data' on the returned object
@@ -106,8 +110,11 @@ async function mainEvent() { // the async keyword means we can make API requests
 }
 
 generateListButton.addEventListener('click', (event) => {   
-
+ console.log('generate new list');
+ const restaurantsList = cutRestaurantList(currentList);
+ injectHTML(restaurantsList);
 });
+
 /*
   This adds an event listener that fires our main event only once our page elements have loaded
   The use of the async keyword means we can "await" events before continuing in our scripts
