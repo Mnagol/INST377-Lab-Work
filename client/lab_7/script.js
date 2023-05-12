@@ -44,6 +44,7 @@ function getRandomIntInclusive(min, max) {
   
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
+    generateListButton.style.display = 'none';
     let storedList = [];
     let currentList = [];
     loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
